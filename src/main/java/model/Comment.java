@@ -1,10 +1,15 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.UUID;
 
+@NamedQueries({
+        @NamedQuery(name = "comment.findByID", query = "SELECT c FROM Comment c WHERE c.id = :id"),
+        @NamedQuery(name = "comment.findByCreator", query = "SELECT c FROM Comment c WHERE c.creator = :creatorID"),
+        @NamedQuery(name = "comment.findByKweet", query = "SELECT c FROM Comment c WHERE c.kweet = :kweetID"),
+        @NamedQuery(name = "comment.findByTag", query = "SELECT c FROM Comment c WHERE c.message LIKE :tag"),
+        @NamedQuery(name = "comment.getAllComments", query = "SELECT c FROM Comment c")
+})
 @Entity(name = "Comment")
 public class Comment {
 

@@ -5,6 +5,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+@NamedQueries({
+        @NamedQuery(name = "user.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
+        @NamedQuery(name = "user.authenticateUser", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"),
+})
+
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "USERROLE")
 @Entity(name = "User")

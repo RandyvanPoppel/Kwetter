@@ -1,17 +1,26 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
+@NamedQueries({
+        @NamedQuery(name = "kweet.findByID", query = "SELECT k FROM Kweet k WHERE k.id = :id"),
+        @NamedQuery(name = "kweet.findByTag", query = "SELECT k FROM Kweet k WHERE k.message LIKE :tag"),
+        @NamedQuery(name = "kweet.getAllKweets", query = "SELECT k FROM Kweet k")
+})
 @Entity(name = "Kweet")
 public class Kweet implements Serializable {
 
     @Id
     private String id;
 
+    @ManyToOne
     private Kweeter creator;
+
+    @ManyToMany
+    private List<Kweeter> likes;
 
     private String message;
 
